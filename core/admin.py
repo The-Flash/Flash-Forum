@@ -5,6 +5,6 @@ from . import models
 
 admin.site.register(models.User)
 admin.site.register(models.Tag)
-admin.site.register(models.Topic)
+admin.site.register(models.Thread)
 admin.site.register(models.Post)
 admin.site.register(models.FileAttachment)

@@ -19,7 +19,7 @@ class Tag(models.Model):
         return self.title
 
 
-class Topic(models.Model):
+class Thread(models.Model):
     title = models.CharField(max_length=200)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # User who posted this topic
     tags = models.ManyToManyField("Tag") # Tags associated with a question/topic
@@ -32,6 +32,7 @@ class Topic(models.Model):
 
 
 class Post(models.Model):
+    thread = models.ForeignKey("Thread", on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
     attachments = models.ManyToManyField("FileAttachment", blank=True)
