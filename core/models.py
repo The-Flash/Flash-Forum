@@ -37,7 +37,7 @@ class Post(models.Model):
     title = models.CharField(max_length=500)
     attachments = models.ManyToManyField("FileAttachment", blank=True)
     content = models.TextField()
-    parent = models.ForeignKey("self", blank=True, null=True, related_name="response", on_delete=models.CASCADE)
+    parent = models.ManyToManyField("self", blank=True, related_name="responses")
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
