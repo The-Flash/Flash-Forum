@@ -45,6 +45,6 @@ body {
     padding: 0;
 }
 
-.messages .error {
-    color: red;
+.error {
+    color: red!important;
 }

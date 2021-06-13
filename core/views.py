@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 from django.contrib import messages
 
 # Create your views here.
@@ -12,12 +15,12 @@ def sign_out(request):
 
 class SignInView(View):
     template_name = "core/sign-in.html"
+    context = {
+        "title": "Sign In | Flash Forum"
+    }
 
     def get(self, request, *args, **kwargs):
-        context = {
-            "title": "Sign In | Flash Forum"
-        }
-        return render(request, self.template_name, context)
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         username = request.POST["username"]
@@ -32,23 +35,47 @@ class SignInView(View):
 
 class SignUpView(View):
     template_name = "core/sign-up.html"
+    context = {
+        "title": "Sign Up | Flash Forum"
+    }
 
     def get(self, request, *args, **kwargs):
-        context = {
-            "title": "Sign Up | Flash Forum"
-        }
-        return render(request, self.template_name, context)
+        form = SignUpForm()
+        self.context["form"] = form
+        return render(request, self.template_name, self.context)
+
+    def post(self, request, *args, **kwargs):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect("core:complete-profile")
+        self.context["form"] = form
+        return render(request, self.template_name, self.context)
+
+
+class CompleteProfileView(LoginRequiredMixin, View):
+    template_name = "core/complete-profile.html"
+    redirect_field_name = "next"
+    login_url = reverse_lazy("core:sign-in")
+    context = {
+        "title": "Complete Profile | Flash Forum"
+    }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.context)
 
 
 class HomePageView(LoginRequiredMixin, View):
     template_name = "core/homepage.html"
     redirect_field_name = "next"
+    login_url = reverse_lazy("core:sign-in")
+    context = {
+        "title": "Home | Flash Forum"
+    }
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "title": "Home | Flash Forum"
-        }
-        return render(request, self.template_name, context)
-
-    def get_login_url(self):
-        return reverse("core:sign-in")
+    def get(self, request, *args, **kwargs):  
+        return render(request, self.template_name, self.context)
