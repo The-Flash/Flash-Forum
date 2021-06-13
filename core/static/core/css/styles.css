@@ -25,23 +25,24 @@ body {
     font-size: 20px;
 }
 
-#login-form {
+#auth-form {
     background-color: white;
     margin-top: 4rem;
     width: 25rem;
-    height: 25rem;
+    /* height: 25rem; */
 }
 
-#login-form #heading-container {
+#auth-form #heading-container {
     background-color: #f3f5f9;
 }
 
-#login-form #heading-container h3 {
+#auth-form #heading-container h3 {
     font-weight: bold;
 }
 
 .messages {
     list-style-type: none;
+    padding: 0;
 }
 
 .messages .error {

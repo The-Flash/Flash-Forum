@@ -1,5 +1,77 @@
 {% extends "_base.html" %}
 
+{% block css %}
+{% load static %}
+<style>
+    main {
+        height: 100%;
+        background: url("{% static 'core/images/background-img.jpg' %}") rgba(0, 0, 100, 0.6);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: multiply;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>Sign Up View</h1>
+<main>
+    {% include 'partials/navbar_unauth.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="text-container">
+                    <h1>
+                        Join our community<br> of experts.<br>Grow with us.
+                    </h1>
+                    <p>
+                        Have a question on your mind?<br>
+                        Join our community and expand your knowledge.
+                    <p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <form id="auth-form" action="{% url 'core:sign-up' %}" method="post">
+                    <div class="p-3" id="heading-container">
+                        <h3 class="text-center">Sign Up</h3>
+                    </div>
+                    {% csrf_token %}
+                    <div class="d-flex flex-column p-4">
+                        <div class="mb-4">
+                            <input name="username" type="text" placeholder="Username" required class="form-control" id="username"/>
+                        </div>
+                        <div class="mb-4">
+                            <input name="email" type="text" placeholder="Email" required class="form-control" id="email"/>
+                        </div>
+                        <div class="mb-4">
+                            <input name="first_name" type="text" placeholder="First Name" required class="form-control" id="first_name"/>
+                        </div>
+                        <div class="mb-4">
+                            <input name="last_name" type="text" placeholder="Last Name" required class="form-control" id="last_name"/>
+                        </div>
+                        <div class="mb-4">
+                            <input name="password" type="password" placeholder="Password" required class="form-control" id="password"/>
+                        </div>
+                        <div class="mb-4">
+                            <input name="password2" type="text" placeholder="Confirm Password" required class="form-control" id="password2"/>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary rounded-pill w-100">Sign Up</button>
+                        </div>
+                        <div>
+                            <p class="form-text">Already have an account? <a href="{% url 'core:sign-in' %}" class="link-primary">Click Here</a></p>
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }} form-text"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

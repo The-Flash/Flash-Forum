@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views import View
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
 # Create your views here.
+def sign_out(request):
+    logout(request)
+    return redirect(reverse("core:sign-in"))
 
 class SignInView(View):
     template_name = "core/sign-in.html"
@@ -35,11 +40,15 @@ class SignUpView(View):
         return render(request, self.template_name, context)
 
 
-class HomePageView(View):
+class HomePageView(LoginRequiredMixin, View):
     template_name = "core/homepage.html"
+    redirect_field_name = "next"
 
     def get(self, request, *args, **kwargs):
         context = {
             "title": "Home | Flash Forum"
         }
         return render(request, self.template_name, context)
+
+    def get_login_url(self):
+        return reverse("core:sign-in")
