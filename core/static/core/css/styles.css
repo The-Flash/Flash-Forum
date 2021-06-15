@@ -3,6 +3,11 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+main {
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
 .form-control {
     box-shadow: none!important;
 }
@@ -28,7 +33,7 @@ body {
 #auth-form {
     background-color: white;
     margin-top: 4rem;
-    width: 25rem;
+    /* width: 25rem; */
     /* height: 25rem; */
 }
 

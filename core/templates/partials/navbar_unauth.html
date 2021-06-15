@@ -1,7 +1,7 @@
 <!--- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container-fluid">
-        <a href="/" class="navbar-brand">Flash Forum</a>
+        <a href="{% url 'core:homepage' %}" class="navbar-brand">Flash Forum</a>
         <div class="d-flex">
             <a href="{% url 'core:sign-in' %}" class="rounded-pill btn btn-outline-primary">Sign In</a>
             <div class="p-2"></div>

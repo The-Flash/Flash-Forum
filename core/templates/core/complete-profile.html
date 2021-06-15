@@ -1,5 +1,24 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h1>Complete Profile</h1>
+<main>
+    {% include 'partials/navbar_auth.html' %}
+    <div class="container">
+        <h2><b>UPLOAD YOUR PHOTO</b></h2>
+        <div class="row">
+            <div class="col-md-2">
+                <form action="" method="post">
+                    <div class="my-3">
+                        <input type="file" class="d-none" name="profile_photo" id="profile_photo">
+                        <label for="profile_photo">
+                            <img style="width: 100%; height: 200px; object-fit:contain;" src="{{ request.user.profile_photo.url }}"
+                                alt="profile_photo">
+                        </label>
+                    </div>
+                    <button class="btn btn-primary w-100">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

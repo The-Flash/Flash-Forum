@@ -4,7 +4,6 @@
 {% load static %}
 <style>
     main {
-        height: 100%;
         background: url("{% static 'core/images/background-img.jpg' %}") rgba(0, 0, 100, 0.6);
         background-repeat: no-repeat;
         background-size: cover;
@@ -19,7 +18,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12 col-md-6 col-lg-8">
                 <div id="text-container">
                     <h1>
                         Join our community<br> of experts.<br>Grow with us.
@@ -30,7 +29,7 @@
                     <p>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
                 <form id="auth-form" action="{% url 'core:sign-up' %}" method="post">
                     <div class="p-3" id="heading-container">
                         <h3 class="text-center">Sign Up</h3>

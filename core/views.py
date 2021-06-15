@@ -59,7 +59,6 @@ class SignUpView(View):
 
 class CompleteProfileView(LoginRequiredMixin, View):
     template_name = "core/complete-profile.html"
-    redirect_field_name = "next"
     login_url = reverse_lazy("core:sign-in")
     context = {
         "title": "Complete Profile | Flash Forum"
@@ -71,7 +70,6 @@ class CompleteProfileView(LoginRequiredMixin, View):
 
 class HomePageView(LoginRequiredMixin, View):
     template_name = "core/homepage.html"
-    redirect_field_name = "next"
     login_url = reverse_lazy("core:sign-in")
     context = {
         "title": "Home | Flash Forum"
